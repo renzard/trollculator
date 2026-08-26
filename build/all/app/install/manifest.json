@@ -1,0 +1,15 @@
+{
+    "name": "trollculator",
+    "description": "A troll calculator for Ubuntu Touch",
+    "architecture": "all",
+    "title": "Trollculator",
+    "hooks": {
+        "trollculator": {
+            "apparmor": "trollculator.apparmor",
+            "desktop": "trollculator.desktop"
+        }
+    },
+    "version": "0.1.0",
+    "maintainer": "Renzard <renzard21@localhost>",
+    "framework": "ubuntu-sdk-20.04"
+}

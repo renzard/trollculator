@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Instagram UT
+Comment=Instagram client for Ubuntu Touch
+Exec=qmlscene qml/Main.qml
+Icon=assets/icon.svg
+Terminal=false
+Type=Application
+X-Ubuntu-Touch=true
