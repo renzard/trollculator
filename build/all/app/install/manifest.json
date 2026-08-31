@@ -9,7 +9,7 @@
             "desktop": "trollculator.desktop"
         }
     },
-    "version": "0.1.2",
+    "version": "0.1.3",
     "maintainer": "Renzard <renzard21@localhost>",
     "framework": "ubuntu-sdk-20.04"
 }
