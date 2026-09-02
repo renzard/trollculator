@@ -128,7 +128,14 @@ MainView {
                 resetOnNextInput = false;
             } else if (btn === "π") {
                 var valPi = Math.PI;
-                if (trollModeEnabled) valPi = 3.0; // Troll Pi = 3
+                if (trollModeEnabled) {
+                    valPi = 3.0; // Troll Pi = 3
+                    sofiaOverlay.visible = true;
+                    sofiaMusic.stop();
+                    sofiaMusic.play();
+                } else {
+                    valPi = Math.PI;
+                }
                 display = (display === "0" || resetOnNextInput) ? valPi.toString() : display + valPi.toString();
                 resetOnNextInput = false;
             } else if (btn === "i") {
@@ -1779,6 +1786,73 @@ MainView {
 
                 Label {
                     text: "Why would you want to login to a calculator?"
+                    color: "white"
+                    font.pixelSize: units.gu(3)
+                    horizontalAlignment: Text.AlignHCenter
+                    wrapMode: Text.WordWrap
+                    width: parent.width
+                }
+            }
+        }
+
+        // --- Η ΟΘΟΝΗ ΤΗΣ ΠΡΙΓΚΙΠΙΣΣΑΣ ΣΟΦΙΑΣ (π button - Troll Mode) ---
+        Rectangle {
+            id: sofiaOverlay
+            anchors.fill: parent
+            color: "black"
+            visible: false
+            z: 130
+
+            MediaPlayer {
+                id: sofiaMusic
+                source: "sofia_theme.mp3"
+                autoLoad: true
+            }
+
+            // Top-Left Back Button
+            Rectangle {
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.topMargin: units.gu(2)
+                anchors.leftMargin: units.gu(2)
+                width: units.gu(5)
+                height: width
+                radius: width / 2
+                color: "#333333"
+                z: 10
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "←"
+                    color: "white"
+                    font.pixelSize: units.gu(3)
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        playClick();
+                        sofiaOverlay.visible = false
+                        sofiaMusic.stop()
+                    }
+                }
+            }
+
+            Column {
+                anchors.centerIn: parent
+                spacing: units.gu(3)
+                width: parent.width - units.gu(4)
+
+                Image {
+                    source: "princess-sofia-with-whatnaught-and-clover-b4lsa9v66e27fr0h-785642301.jpg"
+                    width: units.gu(30)
+                    height: units.gu(30)
+                    fillMode: Image.PreserveAspectFit
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+
+                Label {
+                    text: "You are a little princess"
                     color: "white"
                     font.pixelSize: units.gu(3)
                     horizontalAlignment: Text.AlignHCenter
