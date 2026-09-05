@@ -172,6 +172,22 @@ MainView {
                     resVal += sciTroll;
                 }
 
+                // Meme Easter Egg - cos(
+                if (btn === "cos(" && trollModeEnabled) {
+                    sharedVideoOverlay.visible = true;
+                    sharedMemeVideo.stop();
+                    sharedMemeVideo.source = "Ijustcant_proveit.mp4";
+                    sharedMemeVideo.play();
+                }
+
+                // Meme Easter Egg - log(
+                if (btn === "log(" && trollModeEnabled) {
+                    sharedVideoOverlay.visible = true;
+                    sharedMemeVideo.stop();
+                    sharedMemeVideo.source = "playback.mp4";
+                    sharedMemeVideo.play();
+                }
+
                 display = resVal.toString();
                 resetOnNextInput = true;
             }
@@ -1858,6 +1874,56 @@ MainView {
                     horizontalAlignment: Text.AlignHCenter
                     wrapMode: Text.WordWrap
                     width: parent.width
+                }
+            }
+        }
+
+        // --- Η ΚΟΙΝΗ ΟΘΟΝΗ VIDEO MEME (cos & log buttons - Troll Mode) ---
+        Rectangle {
+            id: sharedVideoOverlay
+            anchors.fill: parent
+            color: "black"
+            visible: false
+            z: 140
+
+            Video {
+                id: sharedMemeVideo
+                anchors.fill: parent
+                fillMode: VideoOutput.PreserveAspectFit
+
+                onStatusChanged: {
+                    if (status === MediaPlayer.EndOfMedia) {
+                        sharedVideoOverlay.visible = false
+                    }
+                }
+            }
+
+            // Top-Left Back Button
+            Rectangle {
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.topMargin: units.gu(2)
+                anchors.leftMargin: units.gu(2)
+                width: units.gu(5)
+                height: width
+                radius: width / 2
+                color: "#333333"
+                z: 10
+
+                Text {
+                    anchors.centerIn: parent
+                    text: "←"
+                    color: "white"
+                    font.pixelSize: units.gu(3)
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        playClick();
+                        sharedVideoOverlay.visible = false
+                        sharedMemeVideo.stop()
+                    }
                 }
             }
         }
