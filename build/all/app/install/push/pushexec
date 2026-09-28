@@ -1,0 +1,9 @@
+#!/usr/bin/python3
+import sys
+from pathlib import Path
+
+if len(sys.argv) != 3:
+    raise SystemExit("usage: pushexec INPUT OUTPUT")
+
+source, destination = map(Path, sys.argv[1:3])
+destination.write_text(source.read_text(), encoding="utf-8")
